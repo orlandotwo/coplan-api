@@ -2,7 +2,7 @@
 Esta apirest es de prueba para proyecto coplan
 # Endpoints:
 
--LISTA-
+##-LISTA-
 get: http://localhost:8081/list
 descripcion: obtener listas
 
@@ -13,7 +13,7 @@ body-json:
     }
 descripcion: crear lista
 
--CARD-
+##-CARD-
 get: http://localhost:8081/card
 descripcion: obtener listas
 
@@ -24,3 +24,6 @@ body-json:
        "nomCard": "Nueva lista"
     }
 descripcion: crear lista
+
+##Run Api
+node app
