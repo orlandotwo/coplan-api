@@ -37,6 +37,28 @@ const setList = (req = request, res = response) =>{
     });
 }
 
+const putList = (req = request, res = response) => {}
+
+const deleteList = (req = request, res = response) => {
+    console.log('req.params',req.params)
+    const { idList, idCard } = req.params; 
+
+    console.log('-------->',idList,idCard);
+    let db = readDataFile(); 
+
+    const listIndex = db.findIndex(list => list.id == idList);
+    if (listIndex === -1) {
+        return res.status(404).send({ status: 'error', data: 'Lista no encontrada' });
+    }
+
+    db.splice(listIndex, 1);
+
+    writeDataFile(db);
+
+    // Responder con éxito
+    res.status(200).send({ status: 'success', data: 'Lista eliminada' });
+}
+
 //------------------------CARD------------------------
 const getCard = (req = request, res = response) =>{
 
@@ -69,7 +91,7 @@ const setCard = (req = request, res = response) =>{
             list.listCard = [];
         }
 
-        card.color = 'green';
+        card.prioridad = 'Baja';
 
         list.listCard.push(card);
         console.log('list -> ', list)
@@ -87,9 +109,88 @@ const setCard = (req = request, res = response) =>{
     
 }
 
+const putCard = (req = request, res = response) =>{
+    /*
+    data = { 
+        "idList": 0,
+        "card": {
+            "id": 2,
+            "nombre": "Custom 2",
+            "prioridad": "Baja",
+            "descripcion": ""
+    }
+    */
+    const data = req.body;
+
+    console.log(data);
+    let resp = {status: '', data: {} };
+    let db = readDataFile();
+    // console.log('db 0-> ',db[0].listCard[0])
+    // console.log('db 1-> ',db[0].listCard[0])
+    // console.log('db 2-> ',db[0].listCard[0]);
+    try {
+        let list = db.find(list => list.id === parseInt(data.idList));
+        if(list && list.listCard){
+            let index = list.listCard.findIndex(card => card.id === data.card.id);
+            if(index !== -1){
+                db = db.map(listItem => listItem.id === list.id ? {...list, listCard: [...list.listCard.slice(0, index), data.card, ...list.listCard.slice(index+1)]}: listItem);
+                writeDataFile(db);
+            }
+        }
+        
+        resp.status = 'success';
+        resp.data = 'Card modificada';
+        res.status(200).send(resp);
+
+    } catch (error) {
+        resp.status = 'error';
+        resp.data = 'List not found';
+        res.status(404).send(resp);
+    }
+   
+    //console.log('card modificada -> ',list.listCard);
+}
+
+const deleteCard = (req = request, res = response) => {
+    console.log('req.params',req.params)
+    const { idList, idCard } = req.params; // Obtener idList y idCard de los parámetros de la solicitud
+    /*
+     const data = {
+        idList:1,
+        idCard:2
+      }
+    */
+   console.log('-------->',idList,idCard);
+    let db = readDataFile(); // Leer los datos del archivo JSON
+
+    // Buscar la lista por idList
+    const listIndex = db.findIndex(list => list.id == idList);
+    if (listIndex === -1) {
+        return res.status(404).send({ status: 'error', data: 'Lista no encontrada' });
+    }
+
+    // Buscar la tarjeta por idCard en la lista encontrada
+    const cardIndex = db[listIndex].listCard.findIndex(card => card.id == idCard);
+    if (cardIndex === -1) {
+        return res.status(404).send({ status: 'error', data: 'Tarjeta no encontrada' });
+    }
+
+    // Eliminar la tarjeta de la lista
+    db[listIndex].listCard.splice(cardIndex, 1);
+
+    // Escribir los datos actualizados de vuelta al archivo JSON
+    writeDataFile(db);
+
+    // Responder con éxito
+    res.status(200).send({ status: 'success', data: 'Card eliminada' });
+}
 module.exports = {
     getList,
     setList,
+    putList,
+    deleteList,
     getCard,
-    setCard
+    setCard,
+    putCard,
+    deleteCard,
 }

@@ -5,18 +5,16 @@
     "listCard": [
       {
         "id": 0,
-        "nombre": "Custom 0",
-        "color": "green"
+        "nombre": "login",
+        "prioridad": "Alta",
+        "descripcion": ""
       },
       {
-        "id": 1,
-        "nombre": "Custom 1",
-        "color": "green"
+        "id": 3,
+        "nombre": "Custom 3",
+        "prioridad": "Baja",
+        "descripcion": "card loca"
       }
     ]
-  },
-  {
-    "nombre": "home",
-    "id": 1
   }
 ]
