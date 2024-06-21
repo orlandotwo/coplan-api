@@ -37,7 +37,23 @@ const setList = (req = request, res = response) =>{
     });
 }
 
-const putList = (req = request, res = response) => {}
+const putList = (req = request, res = response) => {
+    const { id, nombre } = req.body;
+    
+    console.log('req.body', req.body);
+    console.log('-------->', id, nombre);
+    
+    let db = readDataFile();
+
+    const listIndex = db.findIndex(list => list.id == id);
+    if (listIndex === -1) {
+        return res.status(404).send({ status: 'error', data: 'Lista no encontrada' });
+    }
+    db[listIndex].nombre = nombre;
+    writeDataFile(db);
+
+    res.status(200).send({ status: 'success', data: 'Lista actualizada' });
+}
 
 const deleteList = (req = request, res = response) => {
     console.log('req.params',req.params)
@@ -50,12 +66,10 @@ const deleteList = (req = request, res = response) => {
     if (listIndex === -1) {
         return res.status(404).send({ status: 'error', data: 'Lista no encontrada' });
     }
-
     db.splice(listIndex, 1);
 
     writeDataFile(db);
 
-    // Responder con éxito
     res.status(200).send({ status: 'success', data: 'Lista eliminada' });
 }
 
