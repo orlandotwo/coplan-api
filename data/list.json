@@ -1,19 +1,13 @@
 [
   {
-    "nombre": "Login",
+    "nombre": "login",
     "id": 0,
     "listCard": [
       {
         "id": 0,
-        "nombre": "login",
-        "prioridad": "Alta",
+        "nombre": "prueba card",
+        "prioridad": "Media",
         "descripcion": ""
-      },
-      {
-        "id": 3,
-        "nombre": "Custom 3",
-        "prioridad": "Baja",
-        "descripcion": "card loca"
       }
     ]
   }
