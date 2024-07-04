@@ -7,26 +7,34 @@ Esta apirest es de prueba para proyecto coplan
 ### Usuario-login
 **post:** http://localhost:8081/coplan-api/usuario/login  
 **body-json:**
-    {
-        "email": "usuario1@gmail.com", 
-        "password": "123456"
-    }
+````json
+  {
+    "email": "usuario1@gmail.com", 
+    "password": "123456"
+  }
+````
 
 ### Usuario-register
 **post:** http://localhost:8081/coplan-api/usuario/register  
 **body-json:**
-    {
-        "email": "usuario2@gmail.com", 
-        "password": "123456"
-    }
+````json
+  {
+      "email": "usuario2@gmail.com", 
+      "password": "123456"
+  }
+````
 
 ## -LISTA-
 **get:** http://localhost:8081/list  
 **descripcion:** obtener listas
 
 **post:** http://localhost:8081/list  
-**body-json:**  
-    { "nombre": "Nueva lista" }  
+**body-json:** 
+````json
+  { 
+    "nombre": "Nueva lista" 
+  }  
+````
 
 **descripcion:** crear lista
 
@@ -35,11 +43,13 @@ Esta apirest es de prueba para proyecto coplan
 **descripcion:** obtener listas  
 
 **post:** http://localhost:8081/card  
-**body-json:** 
-    {
-        "idLIsta : 2
-       "nomCard": "Nueva lista"
-    }  
+**body-json:**
+````json 
+  {
+      "idLIsta : 2
+     "nomCard": "Nueva lista"
+  }
+````
 **descripcion:** crear lista
 
 ## Run Api
