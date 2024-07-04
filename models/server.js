@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const https = require('https');
-//const { dbConnection } = require('../database/config');
+const { dbConnection } = require('../database/config');
 //let server;
 class Server{
 
@@ -12,14 +12,14 @@ class Server{
         this.port = process.env.PORT;
         this.authPath = '/coplan-api';
         //Conectar a Base de Datos
-        //this.conectarDB();
+        this.conectarDB();
         //Middleware - funcionalidades
         this.middlewares();
         //Rutas de mi aplicacion
         this.routes();
     }
     async conectarDB(){
-        //await dbConnection();
+        await dbConnection();
     }
 
     middlewares(){
