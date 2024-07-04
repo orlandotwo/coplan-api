@@ -2,7 +2,25 @@
 Esta apirest es de prueba para proyecto coplan
 # Endpoints:
 
-##-LISTA-
+## -Usuario-
+
+### Usuario-login
+post: http://localhost:8081/coplan-api/usuario/login
+body: 
+    {
+        "email": "usuario1@gmail.com", 
+        "password": "123456"
+    }
+
+### Usuario-register
+post: http://localhost:8081/coplan-api/usuario/register
+body:
+    {
+        "email": "usuario2@gmail.com", 
+        "password": "123456"
+    }
+
+## -LISTA-
 get: http://localhost:8081/list
 descripcion: obtener listas
 
@@ -13,7 +31,7 @@ body-json:
     }
 descripcion: crear lista
 
-##-CARD-
+## -CARD-
 get: http://localhost:8081/card
 descripcion: obtener listas
 
