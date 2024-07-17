@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const dataFilePath = path.join(__dirname, '..', 'data', 'list.json');
+const dataFilePath = path.join(__dirname, '..', 'database', 'list.json');
 
 const readDataFile = () => {
     try {
